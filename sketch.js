@@ -1,7 +1,7 @@
 var car, car_img;
 var road, roadbg;
 var gameState = 'initial';
-var npcCar, npcCar2, npcCarGrp, npcImg;
+var npcCar, npcCar2, npcCarGrp, npcImg, npcCar2img;
 var score = 0;
 var gameOver, gameOverimg;
 var restart, restartimg;
@@ -12,6 +12,7 @@ function preload(){
     npcImg = loadImage('car2.png');
     gameOverimg = loadImage('gameover.jpg');
     restartimg = loadImage('restart.png');
+    npcCar2img = loadImage('car2.png');
 }
 
 function setup(){
@@ -46,13 +47,14 @@ function draw(){
   
 
     if(gameState === 'initial'){
-        score = 0;
         road.velocityY = 0;
         npcCarGrp.setVelocityYEach(0);
         npcCarGrp.setLifetimeEach(-2)
-        textSize(40);
-        fill("white");
-        text("PRESS SPACE TO PLAY", 750, 400);
+        textSize(20);
+        fill("green");
+        text("PRESS SPACE TO PLAY!", 700, 200);
+        fill("blue")
+        text("Use Arrow Keys to move", 700, 400);
         if(keyDown("space")){
             gameState = 'play';
         }
@@ -89,7 +91,6 @@ function draw(){
     }
     if(car.isTouching(npcCarGrp)){
         gameState = 'initial'
-        score = 0;
         car.velocityX = 0;
         car.velocityY = 0;
         frameCount = 0;
@@ -154,7 +155,7 @@ function spawnNPC(){
         npcCar = createSprite(randX, 0, 20, 20);
         npcCar2 = createSprite(randX, 0, 20, 20);
         npcCar.addImage(npcImg);
-        npcCar2.addImage(npcImg);
+        npcCar2.addImage(npcCar2img);
         npcCar.velocityY =  (6 + 3*score/100);
         npcCar2.velocityY =  (6 + 3*score/150);
         npcCar.lifetime = 200;
